@@ -5,4 +5,9 @@
         {{company.name}} is in {{company.country}}
     </li>    
     </ul>
+    <h2>Add Company?</h2>
+    <input type="text" ng-model="vm.newCompany.name" placeholder="name">
+    <input type="text" ng-model="vm.newCompany.country" placeholder="country">
+    {{vm.newCompany}}
+    <button ng-click="vm.addNewCompany(vm.newCompany)">Add New Company</button>
 </div>

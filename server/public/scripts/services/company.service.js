@@ -5,6 +5,9 @@ app.service('CompanyService', ['$http', function($http){
     self.companies = {list: [] }; //this is the other side of the company.controller 
     //reference of (self.companies=CompanyService.companies)
 
+    self.newCompany = {}; //need to bring along newCompany via controller and definie it so that you can
+    //clear the fields below at the end of the addNewCompany call
+
     self.getCompanies = function () { //and then this is the section that refers to the AJAX request to
         //companies.js route, which then feeds into the database
         $http({
@@ -15,6 +18,20 @@ app.service('CompanyService', ['$http', function($http){
             self.companies.list = response.data;
         });
     };
+
+    self.addNewCompany = function (newCompany) {
+        console.log(newCompany);
+        $http({
+            method: 'POST',
+            url: '/companies',
+            data: newCompany
+        }).then(function (response) {
+            console.log('response', response);
+            self.getCompanies();
+            self.newCompany.name = '';
+            self.newCompany.country = '';
+        });
+    }
     
     self.getCompanies();   //don't forget to call the function!
 }]);

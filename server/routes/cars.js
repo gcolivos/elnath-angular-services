@@ -29,8 +29,8 @@ router.post('/', function (req, res) {
             console.log('error', errorConnectingToDatabase);
             res.sendStatus(500);
         } else {
-            client.query(`INSERT INTO cars (name, country)
-                          VALUES($1, $2);`, [newCompany.name, newCompany.country],
+            client.query(`INSERT INTO cars (company_id, year, model, nickname)
+                          VALUES($1, $2, $3, $4);`, [newCar.company_id, newCar.year, newCar.model, newCar.nickname],
                 function (errorMakingDatabaseQuery, result) {
                     done();
                     if (errorMakingDatabaseQuery) {

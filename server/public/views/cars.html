@@ -23,9 +23,16 @@
 <div>
     <h2>Add Car?</h2>
     <input type="text" ng-model="vm.newCar.year" placeholder="year">
-    <input type="text" ng-model="vm.newCar.name" placeholder="make">
+    <select ng-options="company.id as company.name for company in vm.companies.list track by company.id" ng-model="vm.newCar.company_id">
+   <!-- Comment: OK. So for the options on the company dropdown, it pulls company.id but represents it in
+   the dropdown as company.name (____ as _____), and then says for company in companies list (where
+   it's getting it from). Finally it also states "track by company.id" which means that the data
+   it appends to the newCar object is the company.id value, which is then reflected in the ng-model value. 
+    
+    You also have to update the Car controller to account for the fact that you are pulling in Company data,
+    like so: ['CarService','CompanyService', function(CarService, CompanyService){ (see Line 1 of Car controller)-->
+    </select>
     <input type="text" ng-model="vm.newCar.model" placeholder="model">
     <input type="text" ng-model="vm.newCar.nickname" placeholder="nickname">
-    <input type="text" ng-model="vm.newCar.country" placeholder="country">
-    <button ng-click="vm.addNewCar(vm.newCar)">Add New Company</button>
+    <button ng-click="vm.addNewCar(vm.newCar)">Add New Car</button>
 </div>

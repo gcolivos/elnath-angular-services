@@ -5,7 +5,7 @@ app.service('CarService', ['$http', function($http){
     self.cars = {list: [] }; //this is the other side of the company.controller 
     //reference of (self.companies=CompanyService.companies)
 
-    self.newCar = {}; //need to bring along newCompany via controller and definie it so that you can
+    self.newCar = {}; //need to bring along newCompany via controller and define it so that you can
     //clear the fields below at the end of the addNewCompany call
 
     self.getCars = function () { //and then this is the section that refers to the AJAX request to
@@ -21,16 +21,17 @@ app.service('CarService', ['$http', function($http){
     };
 
     self.addNewCar = function (newCar) {
-        console.log(newCompany);
+        console.log(newCar);
         $http({
             method: 'POST',
             url: '/cars',
             data: newCar
         }).then(function (response) {
             console.log('response', response);
-            self.getCompanies();
-            self.newCompany.name = '';
-            self.newCompany.country = '';
+            self.getCars();
+            self.newCar.year = '';
+            self.newCar.model = '';
+            self.newCar.nickname = '';
         });
     }
     
